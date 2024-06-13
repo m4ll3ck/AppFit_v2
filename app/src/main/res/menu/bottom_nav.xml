@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <item
+        android:id="@+id/miprograma"
+        android:icon="@drawable/gimnasio"
+        android:title="mi_programa"
+        />
+
+    <item
+        android:id="@+id/estadisticas"
+        android:icon="@drawable/estadistica"
+        android:title="estadisticas" />
+
+    <item
+        android:id="@+id/comida"
+        android:icon="@drawable/restaurante"
+        android:title="Comida" />
+
+    <item
+        android:id="@+id/yo"
+        android:icon="@drawable/usuario"
+        android:title="yo" />
+
+</menu>

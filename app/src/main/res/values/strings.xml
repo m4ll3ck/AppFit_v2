@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppFit_v2</string>
+    <string name="textnombre">textNombre</string>
+    <string name="todo">TODO</string>
 </resources>

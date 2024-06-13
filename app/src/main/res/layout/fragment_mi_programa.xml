@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#161819"
+    tools:context=".mi_programa">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="#1E1E1E">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hola Bienvenido"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:translationX="30dp"
+                    android:translationY="40dp" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:translationX="340dp"
+                    android:translationY="50dp"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenido a GymPichicata compartelo con tus GymBros y crezcan juntos"
+                    android:textColor="#FFFFFF"
+                    android:translationX="30dp"
+                    android:translationY="70dp" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1E1E1E"
+                android:orientation="vertical"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="729dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mis Entrenamientos"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:translationX="30dp"
+                    android:translationY="30dp" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Crea tus propias rutinas de entrenamiento"
+                    android:textColor="#A3A3A3"
+                    android:translationX="30dp"
+                    android:translationY="30dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvCrearRutina"
+                    android:layout_width="350dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#1E1E1E"
+                    android:translationX="30dp"
+                    android:translationY="50dp">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="100dp"
+                        android:layout_height="77dp"
+                        android:translationX="240dp"
+                        android:translationY="10dp"
+                        app:srcCompat="@drawable/mancuerna" />
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Crear una"
+                        android:textColor="#BDF147"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:translationX="20dp"
+                        android:translationY="30dp" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="rutina de entrenamiento"
+                        android:textColor="#A3A3A3"
+                        android:translationX="20dp"
+                        android:translationY="50dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:translationX="190dp"
+                        android:translationY="30dp"
+                        android:visibility="invisible" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entrenamiento Inmediato"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:translationX="30dp"
+                    android:translationY="80dp" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="339dp"
+                    android:layout_height="wrap_content"
+                    android:text="Un nuevo entrenamiento basado en tus preferencias de manera inmediata"
+                    android:textColor="#A3A3A3"
+                    android:translationX="30dp"
+                    android:translationY="80dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="350dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#1E1E1E"
+                    android:translationX="30dp"
+                    android:translationY="100dp">
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Entrenamiento Rapido"
+                        android:textColor="#BDF147"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:translationX="20dp"
+                        android:translationY="30dp" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Empezar ahora >"
+                        android:textColor="#A3A3A3"
+                        android:translationX="20dp"
+                        android:translationY="50dp" />
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="124dp"
+                        android:layout_height="102dp"
+                        android:translationX="225dp"
+                        android:translationY="8dp"
+                        app:srcCompat="@drawable/a" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mas opciones"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:translationX="30dp"
+                    android:translationY="140dp" />
+
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:insetLeft="20dp"
+                    android:text="Historial de Entrenamiento"
+                    android:textAlignment="textStart"
+                    android:translationY="150dp"
+
+                    app:icon="@drawable/historial"
+                    app:iconPadding="20dp"
+                    app:iconTint="#BDF147" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:insetLeft="20dp"
+                    android:text="Fatiga Muscular"
+                    android:textAlignment="textStart"
+                    android:translationY="150dp"
+
+                    app:icon="@drawable/fatiga"
+                    app:iconPadding="20dp"
+                    app:iconTint="#BDF147" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:insetLeft="20dp"
+                    android:text="Recordatorios y Notificaciones"
+                    android:textAlignment="textStart"
+                    android:translationY="150dp"
+
+                    app:icon="@drawable/notificacion"
+                    app:iconPadding="20dp"
+                    app:iconTint="#BDF147" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:insetLeft="20dp"
+                    android:text="Califique la aplicacion"
+                    android:textAlignment="textStart"
+                    android:translationY="150dp"
+
+                    app:icon="@drawable/estrella"
+                    app:iconPadding="20dp"
+                    app:iconTint="#BDF147" />
+
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    android:insetLeft="20dp"
+                    android:text="Compartir Gym Pichicata"
+                    android:textAlignment="textStart"
+                    android:translationY="150dp"
+
+                    app:icon="@drawable/compartir"
+                    app:iconPadding="20dp"
+                    app:iconTint="#BDF147" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

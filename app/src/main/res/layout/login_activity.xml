@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#161819"
+    android:padding="16dp">
+
+    <!-- Background Image -->
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_imagen" />
+
+    <!-- Back Button -->
+
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/background_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Bienvenido"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
+
+    <!-- Login Instruction -->
+    <TextView
+        android:id="@+id/login_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Inicia sesion"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+
+    <!-- Full Name Input -->
+
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/txt_correo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_instruction"
+        android:layout_marginTop="41dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/user"
+        android:hint="Correo"
+        android:padding="12dp"
+        android:textColor="#ffffff"
+        android:textColorHint="@color/white" />
+
+    <EditText
+        android:id="@+id/txt_clave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_correo"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/lock"
+        android:drawableEnd="@drawable/eye"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColor="#ffffff"
+        android:textColorHint="@color/white" />
+
+    <!-- Remember Me Checkbox -->
+
+    <!-- Forgot Password -->
+
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_clave"
+        android:layout_marginTop="89dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="12dp"
+        android:text="Iniciar sesion"
+        android:textColor="#1c1d1a"
+        android:textSize="16sp" />
+
+    <!-- Sign Up Text -->
+    <TextView
+        android:id="@+id/sign_up_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:onClick="register"
+        android:text="No tienes una cuenta? Registrate"
+        android:textColor="#839f59" />
+
+</RelativeLayout>
