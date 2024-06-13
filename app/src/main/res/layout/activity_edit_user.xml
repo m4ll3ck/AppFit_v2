@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/txt_edit_nombreUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de Usuario" />
+
+    <EditText
+        android:id="@+id/txt_edit_correo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_edit_nombreUsuario"
+        android:layout_marginTop="16dp"
+        android:hint="Correo" />
+
+    <EditText
+        android:id="@+id/txt_edit_clave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_edit_correo"
+        android:layout_marginTop="16dp"
+        android:hint="Clave"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_edit_clave"
+        android:layout_marginTop="16dp"
+        android:text="Actualizar" />
+
+</RelativeLayout>

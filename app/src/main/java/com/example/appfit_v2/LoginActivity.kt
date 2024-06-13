@@ -1,5 +1,8 @@
 package com.example.appfit_v2
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -13,12 +16,16 @@ import java.io.IOException
 class LoginActivity : AppCompatActivity() {
 
     companion object {
-        const val URL_LOGIN = "http://192.168.101.10/proyectoFIT/loginUsuario.php"
+        const val URL_LOGIN = "http://192.168.101.10/proyectoFIT/loginUsuario.php"  // Reemplaza con tu IP
     }
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
+
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         val txtCorreo: EditText = findViewById(R.id.txt_correo)
         val txtClave: EditText = findViewById(R.id.txt_clave)
@@ -31,11 +38,18 @@ class LoginActivity : AppCompatActivity() {
             if (correo.isEmpty() || clave.isEmpty()) {
                 Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
             } else {
-                loginUser(correo, clave) { success, message ->
+                loginUser(correo, clave) { success, message, userId ->
                     runOnUiThread {
                         if (success) {
+                            with(sharedPreferences.edit()) {
+                                putInt("user_id", userId)
+                                apply()
+                            }
                             Toast.makeText(this, "Inicio de sesión exitoso: $message", Toast.LENGTH_SHORT).show()
-                            // Aquí puedes agregar lógica adicional, como redirigir al usuario a otra actividad
+                            val intent = Intent(this, EditUserActivity::class.java)
+                            intent.putExtra("user_id", userId)
+                            startActivity(intent)
+                            finish() // Opcional: finalizar la actividad de inicio de sesión
                         } else {
                             Toast.makeText(this, "Error en el inicio de sesión: $message", Toast.LENGTH_SHORT).show()
                         }
@@ -45,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun loginUser(email: String, password: String, callback: (Boolean, String) -> Unit) {
+    private fun loginUser(email: String, password: String, callback: (Boolean, String, Int) -> Unit) {
         val client = OkHttpClient()
 
         val json = JSONObject()
@@ -61,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                callback(false, "Network Error: ${e.message}")
+                callback(false, "Network Error: ${e.message}", -1)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -69,7 +83,8 @@ class LoginActivity : AppCompatActivity() {
                 val json = JSONObject(responseData)
                 val success = json.getBoolean("success")
                 val message = json.getString("message")
-                callback(success, message)
+                val userId = json.optInt("user_id", -1)
+                callback(success, message, userId)
             }
         })
     }
