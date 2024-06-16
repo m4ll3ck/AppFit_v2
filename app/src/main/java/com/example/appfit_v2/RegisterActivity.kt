@@ -51,9 +51,9 @@ class RegisterActivity : AppCompatActivity() {
         val client = OkHttpClient()
 
         val json = JSONObject()
-        json.put("nombre", name)
+        json.put("usuario", name)
         json.put("correo", email)
-        json.put("clave", password)
+        json.put("contrasenia", password)
 
         val body = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
 

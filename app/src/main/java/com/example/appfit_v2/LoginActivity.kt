@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
         val json = JSONObject()
         json.put("correo", email)
-        json.put("clave", password)
+        json.put("contrasenia", password)
 
         val body = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
 

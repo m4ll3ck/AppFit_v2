@@ -67,10 +67,10 @@ class EditUserActivity : AppCompatActivity() {
         val client = OkHttpClient()
 
         val json = JSONObject()
-        json.put("nombre", name)
+        json.put("usuario", name)
         json.put("correo", email)
-        json.put("clave", password)
-        json.put("id", userId)  // Asegúrate de obtener y pasar el ID del usuario correcto
+        json.put("contrasenia", password)
+        json.put("id_usuario", userId)  // Asegúrate de obtener y pasar el ID del usuario correcto
 
         val body = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
 
