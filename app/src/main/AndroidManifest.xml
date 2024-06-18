@@ -24,6 +24,7 @@
         </activity>
 
         <!-- Otras actividades -->
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".EditUserActivity" />
 
     </application>
