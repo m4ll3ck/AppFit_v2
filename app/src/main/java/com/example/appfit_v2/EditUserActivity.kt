@@ -11,6 +11,8 @@ import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import java.io.IOException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class EditUserActivity : AppCompatActivity() {
 
@@ -37,9 +39,17 @@ class EditUserActivity : AppCompatActivity() {
         val txtClave: EditText = findViewById(R.id.txt_edit_clave)
         val btnUpdate: Button = findViewById(R.id.btnUpdate)
 
-        // Obtener datos del usuario (este es un ejemplo, ajusta según tu lógica)
-        // Aquí debes obtener los datos del usuario actual y rellenar los campos de texto
-        // Por ejemplo, desde SharedPreferences o pasando los datos por intent.
+        // Obtener datos de SharedPreferences
+        val sharedPreferences: SharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val nombreUsuario = sharedPreferences.getString("nombre_usuario", "")
+        val correo = sharedPreferences.getString("correo", "")
+        val contrasenia = sharedPreferences.getString("contrasenia", "")
+
+        // Rellenar los campos de texto
+        txtNombreUsuario.setText(nombreUsuario)
+        txtCorreo.setText(correo)
+        txtClave.setText(contrasenia)
+
 
         btnUpdate.setOnClickListener {
             val nombreUsuario = txtNombreUsuario.text.toString().trim()
@@ -63,34 +73,62 @@ class EditUserActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateFirebaseUser(email: String, password: String, callback: (Boolean, String) -> Unit) {
+        val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+
+        user?.let {
+            // Actualizar el correo electrónico
+            user.updateEmail(email).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Actualizar la contraseña
+                    user.updatePassword(password).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            callback(true, "Firebase update successful")
+                        } else {
+                            callback(false, "Error updating password: ${task.exception?.message}")
+                        }
+                    }
+                } else {
+                    callback(false, "Error updating email: ${task.exception?.message}")
+                }
+            }
+        } ?: callback(false, "No user logged in")
+    }
+
     private fun updateUser(name: String, email: String, password: String, callback: (Boolean, String) -> Unit) {
-        val client = OkHttpClient()
+        updateFirebaseUser(email, password) { success, message ->
+            if (success) {
+                val client = OkHttpClient()
 
-        val json = JSONObject()
-        json.put("usuario", name)
-        json.put("correo", email)
-        json.put("contrasenia", password)
-        json.put("id_usuario", userId)  // Asegúrate de obtener y pasar el ID del usuario correcto
+                val json = JSONObject()
+                json.put("usuario", name)
+                json.put("correo", email)
+                json.put("contrasenia", password)
+                json.put("id_usuario", userId)  // Asegúrate de obtener y pasar el ID del usuario correcto
 
-        val body = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
+                val body = RequestBody.create("application/json".toMediaTypeOrNull(), json.toString())
 
-        val request = Request.Builder()
-            .url(URL_UPDATE)
-            .post(body)
-            .build()
+                val request = Request.Builder()
+                    .url(URL_UPDATE)
+                    .post(body)
+                    .build()
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                callback(false, "Network Error: ${e.message}")
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        callback(false, "Network Error: ${e.message}")
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseData = response.body?.string()
+                        val json = JSONObject(responseData)
+                        val success = json.getBoolean("success")
+                        val message = json.getString("message")
+                        callback(success, message)
+                    }
+                })
+            } else {
+                callback(false, message)
             }
-
-            override fun onResponse(call: Call, response: Response) {
-                val responseData = response.body?.string()
-                val json = JSONObject(responseData)
-                val success = json.getBoolean("success")
-                val message = json.getString("message")
-                callback(success, message)
-            }
-        })
+        }
     }
 }

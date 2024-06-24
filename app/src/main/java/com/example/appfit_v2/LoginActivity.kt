@@ -99,16 +99,27 @@ class LoginActivity : AppCompatActivity() {
                 val success = json.getBoolean("success")
                 val message = json.getString("message")
                 val userId = json.optInt("user_id", -1)
+                val nombreUsuario = json.optString("nombre_usuario", "")
+                val correo = json.optString("correo", "")
+                val contrasenia = json.optString("contrasenia", "")
 
                 runOnUiThread {
                     if (success) {
+                        // Guardar datos en SharedPreferences
+                        val sharedPreferences: SharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
                         with(sharedPreferences.edit()) {
                             putInt("user_id", userId)
+                            putString("nombre_usuario", nombreUsuario)
+                            putString("correo", correo)
+                            putString("contrasenia", contrasenia)
                             apply()
                         }
                         Toast.makeText(this@LoginActivity, "Inicio de sesión exitoso: $message", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@LoginActivity, EditUserActivity::class.java)
                         intent.putExtra("user_id", userId)
+                        /*intent.putExtra("nombre_usuario", nombreUsuario)
+                        intent.putExtra("correo", correo)
+                        intent.putExtra("contrasenia", contrasenia)*/
                         startActivity(intent)
                         finish()
                     } else {
