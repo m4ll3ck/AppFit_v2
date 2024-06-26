@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1c1d1a"
+    android:background="#252524"
     android:padding="16dp">
 
     <!-- Background Image -->
@@ -10,9 +10,9 @@
         android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/login_imagen"
-        android:layout_alignParentTop="true" />
+        android:src="@drawable/app_logo" />
 
     <!-- Back Button -->
 
@@ -24,8 +24,8 @@
         android:layout_below="@id/background_image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Bienvenido"
-        android:textColor="#bddd63"
+        android:text="Bienvenido de vuelta"
+        android:textColor="#a0ee00"
         android:textSize="24sp" />
 
     <!-- Login Instruction -->
@@ -36,8 +36,8 @@
         android:layout_below="@id/welcome_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:text="Inicia sesion"
-        android:textColor="#839f59"
+        android:text="Listo para ser mejor que ayer?"
+        android:textColor="#ffffff"
         android:textSize="16sp" />
 
     <!-- Full Name Input -->
@@ -51,6 +51,7 @@
         android:layout_marginTop="41dp"
         android:background="@drawable/rounded_edittext"
         android:drawableStart="@drawable/user"
+        android:drawablePadding="12dp"
         android:hint="Correo"
         android:padding="12dp"
         android:textColor="#ffffff"
@@ -64,6 +65,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_edittext"
         android:drawableStart="@drawable/lock"
+        android:drawablePadding="12dp"
         android:drawableEnd="@drawable/eye"
         android:hint="Contraseña"
         android:inputType="textPassword"
@@ -82,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_clave"
         android:layout_marginTop="89dp"
-        android:backgroundTint="#bddd63"
+        android:backgroundTint="#a0ee00"
         android:padding="12dp"
         android:text="Iniciar sesion"
         android:textColor="#1c1d1a" />
@@ -96,6 +98,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="No tienes una cuenta? Registrate"
-        android:textColor="#839f59" />
+        android:textColor="#a0ee00" />
 
 </RelativeLayout>

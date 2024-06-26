@@ -3,12 +3,15 @@ package com.example.appfit_v2
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -17,6 +20,7 @@ import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import java.io.IOException
+import android.text.InputType
 
 class LoginActivity : AppCompatActivity() {
 
@@ -26,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var auth: FirebaseAuth;
+    private var isPasswordVisible: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +43,29 @@ class LoginActivity : AppCompatActivity() {
         val txtClave: EditText = findViewById(R.id.txt_clave)
         val btnLogin: Button = findViewById(R.id.btnLogin)
         val signUpButton: TextView = findViewById(R.id.sign_up_text)
+        val lockIcon: Drawable? = ContextCompat.getDrawable(this, R.drawable.lock)
+        val eyeOpenDrawable: Drawable? = ContextCompat.getDrawable(this, R.drawable.eye)
+        val eyeClosedDrawable: Drawable? = ContextCompat.getDrawable(this, R.drawable.eye_closed)
+
+        txtClave.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= (txtClave.right - txtClave.compoundDrawables[2].bounds.width())) {
+                    if (isPasswordVisible) {
+                        // Ocultar la contraseña
+                        txtClave.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        txtClave.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeOpenDrawable, null)
+                    } else {
+                        // Mostrar la contraseña
+                        txtClave.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                        txtClave.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeClosedDrawable, null)
+                    }
+                    isPasswordVisible = !isPasswordVisible
+                    txtClave.setSelection(txtClave.text.length) // Mueve el cursor al final
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
 
         btnLogin.setOnClickListener {
             val correo = txtCorreo.text.toString().trim()

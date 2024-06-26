@@ -1,11 +1,15 @@
 package com.example.appfit_v2
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.InputType
+import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -21,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private lateinit var auth: FirebaseAuth
+    private var isPasswordVisible: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,29 @@ class RegisterActivity : AppCompatActivity() {
         val txtCorreo: EditText = findViewById(R.id.txt_correo)
         val txtClave: EditText = findViewById(R.id.txt_clave)
         val btnRegistrar: Button = findViewById(R.id.btnRegistrar)
+        val lockIcon: Drawable? = ContextCompat.getDrawable(this, R.drawable.lock)
+        val eyeOpenDrawable: Drawable? = ContextCompat.getDrawable(this, R.drawable.eye)
+        val eyeClosedDrawable: Drawable? = ContextCompat.getDrawable(this, R.drawable.eye_closed)
+
+        txtClave.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= (txtClave.right - txtClave.compoundDrawables[2].bounds.width())) {
+                    if (isPasswordVisible) {
+                        // Ocultar la contraseña
+                        txtClave.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        txtClave.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeOpenDrawable, null)
+                    } else {
+                        // Mostrar la contraseña
+                        txtClave.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                        txtClave.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeClosedDrawable, null)
+                    }
+                    isPasswordVisible = !isPasswordVisible
+                    txtClave.setSelection(txtClave.text.length) // Mueve el cursor al final
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
 
         btnRegistrar.setOnClickListener {
             val nombreUsuario = txtNombreUsuario.text.toString().trim()

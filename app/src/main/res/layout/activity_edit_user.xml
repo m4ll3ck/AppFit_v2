@@ -2,21 +2,50 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#252524"
     android:padding="16dp">
 
+    <!-- Welcome Text -->
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Actualiza los datos de tu perfil"
+        android:textColor="#a0ee00"
+        android:textSize="24sp" />
+
+    <!-- Full Name Input -->
+
+    <!-- Password Input -->
     <EditText
         android:id="@+id/txt_edit_nombreUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre de Usuario" />
+        android:layout_below="@id/welcome_text"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/user"
+        android:drawablePadding="12dp"
+        android:hint="Nombre de usuario"
+        android:padding="12dp"
+        android:textColor="#ffffff"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/txt_edit_correo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txt_edit_nombreUsuario"
+        android:layout_below="@+id/txt_edit_nombreUsuario"
         android:layout_marginTop="16dp"
-        android:hint="Correo" />
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/user"
+        android:drawablePadding="12dp"
+        android:hint="Correo"
+        android:padding="12dp"
+        android:textColor="#ffffff"
+        android:textColorHint="@color/white" />
 
     <EditText
         android:id="@+id/txt_edit_clave"
@@ -24,15 +53,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_edit_correo"
         android:layout_marginTop="16dp"
-        android:hint="Clave"
-        android:inputType="textPassword" />
+        android:background="@drawable/rounded_edittext"
+        android:drawableStart="@drawable/lock"
+        android:drawablePadding="12dp"
+        android:drawableEnd="@drawable/eye"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        android:textColor="#ffffff"
+        android:textColorHint="@color/white" />
 
+    <!-- Remember Me Checkbox -->
+
+    <!-- Forgot Password -->
+
+    <!-- Login Button -->
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/txt_edit_clave"
-        android:layout_marginTop="16dp"
-        android:text="Actualizar" />
+        android:layout_below="@+id/txt_edit_clave"
+        android:layout_marginTop="120dp"
+        android:backgroundTint="#a0ee00"
+        android:padding="12dp"
+        android:text="Actualizar"
+        android:textColor="#1c1d1a" />
 
 </RelativeLayout>

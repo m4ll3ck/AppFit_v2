@@ -2,11 +2,15 @@ package com.example.appfit_v2
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.InputType
+import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
@@ -21,6 +25,7 @@ class EditUserActivity : AppCompatActivity() {
     }
 
     private var userId: Int = -1
+    private var isPasswordVisible: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +54,30 @@ class EditUserActivity : AppCompatActivity() {
         txtNombreUsuario.setText(nombreUsuario)
         txtCorreo.setText(correo)
         txtClave.setText(contrasenia)
+
+        val lockIcon: Drawable? = ContextCompat.getDrawable(this, R.drawable.lock)
+        val eyeOpenDrawable: Drawable? = ContextCompat.getDrawable(this, R.drawable.eye)
+        val eyeClosedDrawable: Drawable? = ContextCompat.getDrawable(this, R.drawable.eye_closed)
+
+        txtClave.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= (txtClave.right - txtClave.compoundDrawables[2].bounds.width())) {
+                    if (isPasswordVisible) {
+                        // Ocultar la contraseña
+                        txtClave.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                        txtClave.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeOpenDrawable, null)
+                    } else {
+                        // Mostrar la contraseña
+                        txtClave.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                        txtClave.setCompoundDrawablesWithIntrinsicBounds(lockIcon, null, eyeClosedDrawable, null)
+                    }
+                    isPasswordVisible = !isPasswordVisible
+                    txtClave.setSelection(txtClave.text.length) // Mueve el cursor al final
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
 
 
         btnUpdate.setOnClickListener {
